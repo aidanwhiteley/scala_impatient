@@ -1,0 +1,8 @@
+target/
+lib_managed/
+project/target/
+project/plugins/lib_managed/
+project/plugins/src_managed/
+.*
+!/.gitignore
+.settings/
