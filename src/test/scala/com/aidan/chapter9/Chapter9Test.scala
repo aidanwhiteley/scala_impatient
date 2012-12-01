@@ -31,20 +31,23 @@ class Chapter9Test extends FunSuite {
     val testInFile = "./src/test/scala/com/aidan/chapter9/mytabfile.txt"
     val testOutFile = "./src/test/scala/com/aidan/chapter9/myspacefile.txt"
     val tabToSpaces = 2
-    
+
     changeTabsToSpaces(testInFile, testOutFile, tabToSpaces)
-    
+
     // Forgetting about error handling in test file...
     import scala.io.Source
-    assert(! Source.fromFile(testOutFile).mkString.contains("\t"))
+    assert(!Source.fromFile(testOutFile).mkString.contains("\t"))
   }
-  
+
   test("Print all words > 12 characters") {
     val testFile = "./src/test/scala/com/aidan/chapter9/mylargewordsfile.txt"
-    printLongWordsToConsole(testFile, 12)
+
+    // Uncomment next line to see stuff splurged to console
+    // printLongWordsToConsole(testFile, 12)
+
     // No actual tests in this test! Just stuff printed to the console
   }
-  
+
   test("Reading floating point numbers from file") {
     val testFile = "./src/test/scala/com/aidan/chapter9/mynumbersfile.txt"
     val fp = new FloatingPointReader(testFile)
@@ -52,6 +55,19 @@ class Chapter9Test extends FunSuite {
     assert(fp.average === 6.0)
     assert(fp.max === 20.0)
     assert(fp.min === 1.1)
+  }
+
+  test("Powers and reciprocals") {
+    val testFile = "./src/test/scala/com/aidan/chapter9/mypowersfile.txt"
+    val data = calculateFormattedPowersRecips(2, 0, 20, 20, testFile)
+
+    val (power0, recip0) = data(0)
+    assert(power0.trim().toDouble === 1.0)
+    assert(recip0.trim().toDouble === 1.0)
+
+    val (power20, recip20) = data(20)
+    assert(power20.trim().toDouble === 1048576.0)
+    assert(recip20.trim().toDouble === 9.5367431640625E-7)
   }
 
 }

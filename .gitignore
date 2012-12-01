@@ -9,3 +9,4 @@ project/plugins/src_managed/
 
 # Ignore files changed when test run
 src/test/scala/com/aidan/chapter9/myfile.txt
+src/test/scala/com/aidan/chapter9/mypowersfile.txt

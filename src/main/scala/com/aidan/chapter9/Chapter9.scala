@@ -35,7 +35,7 @@ object Chapter9 {
       out.close
     }
   }
-  
+
   def changeTabsToSpaces(testInFile: String, testOutFile: String, numberSpaces: Int) = {
     import java.io.PrintWriter
     val currentContents = readFileAsArray(testInFile)
@@ -46,12 +46,33 @@ object Chapter9 {
       for (line <- currentContents) out.println(line.replace("\t", " " * numberSpaces))
     } finally {
       out.close
-    }   
+    }
   }
-  
+
   // Look mum - no error handling!
   def printLongWordsToConsole(testFile: String, numberOfCharacters: Int) = {
     for (word <- Source.fromFile(testFile).mkString.split("\\s") if word.length() > numberOfCharacters) println(word)
+  }
+
+  def calculateFormattedPowersRecips(powerOf: Int, startPower: Int, endPower: Int, formatPrecision: Int, testFile: String): Array[(String, String)] = {
+    import java.io.PrintWriter
+    
+    val powers = for (i <- startPower to endPower) yield scala.math.pow(powerOf, i)
+    val maxLength = powers.last.toString.length()
+    val formatedPowersAndRecips = for (power <- powers) yield (
+      " " * (maxLength - power.toString.length()) + power.toString,
+      (1 / power).toString.take(formatPrecision))
+
+    
+    var out: PrintWriter = null;
+    try {
+      out = new PrintWriter(testFile)
+      for (elem <- formatedPowersAndRecips) out.println(elem._1 + ", " + elem._2)
+    } finally {
+      out.close
+    }
+    
+    formatedPowersAndRecips.toArray
   }
 
 }
@@ -59,8 +80,8 @@ object Chapter9 {
 // Look mum - still no error handling!
 class FloatingPointReader(testFile: String) {
   val tokens = Source.fromFile(testFile).mkString.split("\\s")
-  val numbers = for (w <- tokens if ! w.isEmpty()) yield w.toDouble
-  
+  val numbers = for (w <- tokens if !w.isEmpty()) yield w.toDouble
+
   def sum = numbers.sum
   def average = sum / numbers.length
   def min = numbers.min
