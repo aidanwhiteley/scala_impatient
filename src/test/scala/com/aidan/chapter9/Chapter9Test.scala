@@ -44,5 +44,14 @@ class Chapter9Test extends FunSuite {
     printLongWordsToConsole(testFile, 12)
     // No actual tests in this test! Just stuff printed to the console
   }
+  
+  test("Reading floating point numbers from file") {
+    val testFile = "./src/test/scala/com/aidan/chapter9/mynumbersfile.txt"
+    val fp = new FloatingPointReader(testFile)
+    assert(fp.sum === 48.0)
+    assert(fp.average === 6.0)
+    assert(fp.max === 20.0)
+    assert(fp.min === 1.1)
+  }
 
 }

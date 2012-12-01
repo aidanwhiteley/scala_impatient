@@ -55,3 +55,14 @@ object Chapter9 {
   }
 
 }
+
+// Look mum - still no error handling!
+class FloatingPointReader(testFile: String) {
+  val tokens = Source.fromFile(testFile).mkString.split("\\s")
+  val numbers = for (w <- tokens if ! w.isEmpty()) yield w.toDouble
+  
+  def sum = numbers.sum
+  def average = sum / numbers.length
+  def min = numbers.min
+  def max = numbers.max
+}
