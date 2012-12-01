@@ -1,5 +1,5 @@
 <h1>Project Details</h1>
-
+<p><a href="http://aidanwhiteley.github.com/scala_impatient/">Pretty version of this page</a>.</p>
 <h2>Scala For The Impatient Exercises</h1>
 <p>
 This repository contains some sample solutions to the exercises in Cay Hortsmann's book
