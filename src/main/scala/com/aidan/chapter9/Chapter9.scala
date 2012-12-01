@@ -74,6 +74,11 @@ object Chapter9 {
     
     formatedPowersAndRecips.toArray
   }
+  
+  /*
+   * I don't understand what is being asked for in exercise 6 for Chapter 9 so
+   * there is no code here for it :-)
+   */
 
 }
 
