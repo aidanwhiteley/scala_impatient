@@ -48,5 +48,10 @@ object Chapter9 {
       out.close
     }   
   }
+  
+  // Look mum - no error handling!
+  def printLongWordsToConsole(testFile: String, numberOfCharacters: Int) = {
+    for (word <- Source.fromFile(testFile).mkString.split("\\s") if word.length() > numberOfCharacters) println(word)
+  }
 
 }

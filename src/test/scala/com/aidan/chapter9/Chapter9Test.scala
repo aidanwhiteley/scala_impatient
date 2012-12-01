@@ -38,5 +38,11 @@ class Chapter9Test extends FunSuite {
     import scala.io.Source
     assert(! Source.fromFile(testOutFile).mkString.contains("\t"))
   }
+  
+  test("Print all words > 12 characters") {
+    val testFile = "./src/test/scala/com/aidan/chapter9/mylargewordsfile.txt"
+    printLongWordsToConsole(testFile, 12)
+    // No actual tests in this test! Just stuff printed to the console
+  }
 
 }
