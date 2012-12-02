@@ -109,6 +109,12 @@ object Chapter9 {
   def countFilesByFileType(directory: String, fileSuffix: String) = {
     for (d <- subdirs(new File(directory)); f <- d.listFiles if f.toString.endsWith(fileSuffix)) yield f.toString
   }
+  
+  /*
+   * I can't see that there is any situation where I'd willingly use Java serialisation again 
+   * in the future (compared to using something like Google Protocol Buffers).
+   * Therefore, I've skipped exercise 10 of chapter 9.
+   */
 
 }
 
