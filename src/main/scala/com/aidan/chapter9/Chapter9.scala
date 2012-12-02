@@ -56,14 +56,13 @@ object Chapter9 {
 
   def calculateFormattedPowersRecips(powerOf: Int, startPower: Int, endPower: Int, formatPrecision: Int, testFile: String): Array[(String, String)] = {
     import java.io.PrintWriter
-    
+
     val powers = for (i <- startPower to endPower) yield scala.math.pow(powerOf, i)
     val maxLength = powers.last.toString.length()
     val formatedPowersAndRecips = for (power <- powers) yield (
       " " * (maxLength - power.toString.length()) + power.toString,
       (1 / power).toString.take(formatPrecision))
 
-    
     var out: PrintWriter = null;
     try {
       out = new PrintWriter(testFile)
@@ -71,14 +70,30 @@ object Chapter9 {
     } finally {
       out.close
     }
-    
+
     formatedPowersAndRecips.toArray
   }
-  
+
   /*
    * I don't understand what is being asked for in exercise 6 for Chapter 9 so
    * there is no code here for it :-)
    */
+
+  def findNonFloatingPointData(testFile: String) = {
+    val fpRegex = """[-+]?[0-9]*\.?[0-9]*""".r
+    val fileContents = Source.fromFile(testFile).mkString
+    val fps = fpRegex.findAllIn(fileContents).toArray
+    // As I am not great at regular expressions, trying to negate the above RE would be difficult!
+    // Therefore, the "cheat" is to apply a diff operator to find those in the full file contents
+    // that aren't in the floating point numbers found by the regular expression.
+    // So most of the work has been done by a regular expression...
+    fileContents.split("\\s").diff(fps)
+  }
+  
+  def findAllImageSrc(webpageUrl: String) = {
+    val rePattern = """(<img) (src=\S*)""".r
+    for ( rePattern(img, src) <- rePattern.findAllIn(Source.fromURL(webpageUrl, "UTF-8").mkString)) yield src.drop(4)
+  }
 
 }
 

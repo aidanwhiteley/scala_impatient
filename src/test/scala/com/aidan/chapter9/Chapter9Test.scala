@@ -69,5 +69,24 @@ class Chapter9Test extends FunSuite {
     assert(power20.trim().toDouble === 1048576.0)
     assert(recip20.trim().toDouble === 9.5367431640625E-7)
   }
+  
+  test("Find all non floating point numbers") {
+    val testFile = "./src/test/scala/com/aidan/chapter9/mymixedfile.txt"
+    val data = findNonFloatingPointData(testFile)  
+    
+    assert(data.length === 5)
+    
+    // Uncomment to print to console
+    //println(data.mkString(", "))
+  }
+  
+  test("Find all image src in a web page") {
+    val webpageUrl = "http://outandabout.aidans-place.com/scooby"
+    val imgSrcArray = findAllImageSrc(webpageUrl)
+    assert(imgSrcArray.length > 0)
+    
+    // Uncomment to print to console
+    // println(imgSrcArray.mkString(", "))
+  }
 
 }
