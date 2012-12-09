@@ -42,6 +42,9 @@ class Chapter10Test extends FunSuite {
 
     val logger2 = new CryptoLogger()
     assert("cBd" === logger2.log("zYa"))
+    
+    val logger3 = new CryptoLogger(-3)
+    assert("zYa" === logger3.log("cBd"))
   }
 
 }

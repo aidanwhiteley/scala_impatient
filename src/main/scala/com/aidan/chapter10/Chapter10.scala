@@ -40,12 +40,16 @@ trait CaeasorCryptLogger extends MessageLogger {
         val rotated = ch + rotation
         if (rotated > 90) {
           ((rotated - 90) + 64).toChar
+        } else if (rotated < 65) {
+          (90 - (64 - rotated)).toChar
         } else rotated.toChar
       } // Lowercase ASCII a-z
       else if (ch >= 97 && ch <= 122) {
         val rotated = ch + rotation
         if (rotated > 122) {
           ((rotated - 122) + 96).toChar
+        } else if (rotated < 97) {
+          (122 - (96 - rotated)).toChar
         } else rotated.toChar
       } else {
         // Not handling non alphas
