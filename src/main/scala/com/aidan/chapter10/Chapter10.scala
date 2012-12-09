@@ -26,3 +26,41 @@ class OrderedPoint(x: Int, y: Int) extends java.awt.Point(x, y) with scala.math.
     else this.x - that.x
   }
 }
+
+trait MessageLogger {
+  def log(msg: String) = msg
+}
+
+trait CaeasorCryptLogger extends MessageLogger {
+  var rotation: Int
+  override def log(msg: String) = {
+    val rotated = for (ch <- msg) yield {
+      // Uppercase ASCII A-Z
+      if (ch >= 65 && ch <= 90) {
+        val rotated = ch + rotation
+        if (rotated > 90) {
+          ((rotated - 90) + 64).toChar
+        } else rotated.toChar
+      } // Lowercase ASCII a-z
+      else if (ch >= 97 && ch <= 122) {
+        val rotated = ch + rotation
+        if (rotated > 122) {
+          ((rotated - 122) + 96).toChar
+        } else rotated.toChar
+      } else {
+        // Not handling non alphas
+        ch.toChar
+      }
+    }
+    rotated.mkString
+  }
+}
+
+class CryptoLogger extends CaeasorCryptLogger {
+  var rotation = 3
+
+  def this(rotation: Int) {
+    this()
+    this.rotation = rotation
+  }
+}
