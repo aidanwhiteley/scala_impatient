@@ -22,5 +22,18 @@ class Chapter10Test extends FunSuite {
     assert(egg.getWidth() === 20 + (2 * 10), "Test grow width")
     assert(egg.getHeight() === 30 + (2 * 20), "Test grow height")
   }
+  
+  test("OrderedPoint mixin") {
+    val point1 = new OrderedPoint(3, 5)
+    val point2 = new OrderedPoint(4, 5)
+    val point3 = new OrderedPoint(3, 6)
+    val point4 = new OrderedPoint(1, 1)
+    val point5 = new OrderedPoint(3, 5)
+    
+    assert(point1 < point2, "first test")
+    assert(point1 < point3, "second test")
+    assert(point1 > point4, "third test")
+    assert(point1 >= point5, "fourth test")
+  }
 
 }
