@@ -46,5 +46,36 @@ class Chapter10Test extends FunSuite {
     val logger3 = new CryptoLogger(-3)
     assert("zYa" === logger3.log("cBd"))
   }
+  
+  test("Property change listener") {
+    import java.beans.{PropertyChangeListener, PropertyChangeEvent}
+    
+    class TestPropertyChangeListener extends PropertyChangeListener {
+      var hasEventOccurred = false
+      def propertyChange(evt: PropertyChangeEvent) = {
+        hasEventOccurred = true; 
+      }
+    }
+    val myListerner = new TestPropertyChangeListener
+    
+    val point = new ListeningPoint(5, 10)
+    point.addPropertyChangeListener(myListerner)
+    point.move(3, 2)
+    
+    assert(myListerner.hasEventOccurred === true, "Has event occurred")
+  }
+  
+  test("Rather poor trait hierarchy") {
+    val programmer = new Programmer with BeerDrinker
+    programmer.drink
+    assert(programmer.thirsty === false)
+    assert(programmer.favouriteDrink === "beer")
+    
+    val clippedNoisyProgrammer = new Programmer with LoudSpeaker with NoLowerCaseVowelSpeaker
+    assert(clippedNoisyProgrammer.speak("scala is cool") === "SCL S CL")
+    
+    val nosiyClippedProgrammer = new Programmer with NoLowerCaseVowelSpeaker with LoudSpeaker 
+    assert(nosiyClippedProgrammer.speak("scala is cool") === "SCALA IS COOL")
+  }
 
 }

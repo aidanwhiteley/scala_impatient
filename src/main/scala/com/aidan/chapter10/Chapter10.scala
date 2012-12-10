@@ -1,5 +1,7 @@
 package com.aidan.chapter10
 
+import java.beans.{ PropertyChangeSupport, PropertyChangeListener, PropertyChangeEvent }
+
 object Chapter10 {
 }
 
@@ -31,7 +33,7 @@ trait MessageLogger {
   def log(msg: String) = msg
 }
 
-trait CaeasorCryptLogger extends MessageLogger {
+trait CaesarCryptLogger extends MessageLogger {
   var rotation: Int
   override def log(msg: String) = {
     val rotated = for (ch <- msg) yield {
@@ -60,11 +62,71 @@ trait CaeasorCryptLogger extends MessageLogger {
   }
 }
 
-class CryptoLogger extends CaeasorCryptLogger {
+class CryptoLogger extends CaesarCryptLogger {
   var rotation = 3
 
   def this(rotation: Int) {
     this()
     this.rotation = rotation
   }
+}
+
+/* 
+ * Only implementing one of the PropertyChangeSupport methods!
+ * 
+ * Passes method calls on to PropertyChangeSupport delegate.
+ */
+trait PropertyChangeSupportT {
+  val propChange = new PropertyChangeSupport(this)
+  def addPropertyChangeListener(listener: PropertyChangeListener) = {
+    propChange.addPropertyChangeListener(listener)
+  }
+}
+
+/*
+ * I dont really like my own solution! Means that each method in Point needs to be overriden to
+ * a) call the super class
+ * b) fire an event
+ */
+class ListeningPoint(x: Int, y: Int) extends java.awt.Point with PropertyChangeSupportT {
+  override def move(x: Int, y: Int) {
+    super.move(x, y)
+
+    // Not populated the PropertyChangeEvent object properly - the work isn't worth it for this demo
+    propChange.firePropertyChange(new PropertyChangeEvent(this, "X", "Get old value", "Output new value"))
+  }
+}
+
+trait Drinker {
+  var thirsty = true;
+  val favouriteDrink: String
+  val usualAmount = "glass"
+  def drink = {
+    //println("Drinking a " + usualAmount + " of " + favouriteDrink)
+    thirsty = false
+  }
+}
+trait BeerDrinker extends Drinker {
+  val favouriteDrink = "beer"
+  override val usualAmount = "pint"
+}
+
+trait Speaker {
+  def speak(what: String) = what
+}
+
+trait NoLowerCaseVowelSpeaker extends Speaker {   
+  override def speak(what: String) = {
+    val noVowels = what.filter(p => ! Array('a', 'e', 'i', 'o', 'u').contains(p) )
+    super.speak(noVowels.mkString)
+  }
+}
+
+trait LoudSpeaker extends Speaker {
+  override def speak(what: String) = {
+    super.speak(what.toUpperCase())
+  }
+}
+class Programmer {
+  
 }
