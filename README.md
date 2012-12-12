@@ -11,7 +11,7 @@ I haven't spent the time to create solutions for those exercises that either:
 </p>
 <ul>
 <li>don't really interest me - e.g. the exercises for the chapter on packages</li>
-<li>exercises that don't readily allow test driven development - e.g. those that just want output printed to the console (albeit I'ved converted many of these to return testable Strings)</li>
+<li>exercises that don't readily allow test driven development - e.g. those that just want output printed to the console (albeit I've converted many of these to return testable Strings)</li>
 </ul>
 <h3>Is it any good?</h3>
 <p>

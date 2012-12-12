@@ -130,3 +130,16 @@ trait LoudSpeaker extends Speaker {
 class Programmer {
   
 }
+
+trait BufferTrait extends java.io.InputStream {
+  val bufferLength: Int
+  override def read : Int = {
+    var content = new Array[Byte](bufferLength)
+    super.read(content, 0, bufferLength)
+  }
+  def readContent: String = {
+    var content = new Array[Byte](bufferLength)
+    super.read(content, 0, bufferLength)
+    (for (ch <- content) yield ch.toChar).mkString
+  }
+}
