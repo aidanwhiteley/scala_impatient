@@ -113,5 +113,18 @@ class ASCIIArt(val art: String) {
     import util.Properties
     new ASCIIArt(this.toString + Properties.lineSeparator + Properties.lineSeparator + other.toString)
   }
-  
+}
+
+class RichFile(val file: String) 
+object RichFile {
+  import util.Properties
+  val dirSeparator = Properties.propOrElse("file.separator", "\\")
+  def unapply(input: RichFile) = {
+    if (null == input.file || input.file.isEmpty() || input.file.indexOf(dirSeparator) < 0) None
+    else {
+      val lastSlash = input.file.lastIndexOf(dirSeparator)
+      val lastDot = input.file.lastIndexOf(".")
+      Some( (input.file.take(lastSlash), input.file.substring(lastSlash + 1, lastDot), input.file.substring(lastDot + 1)) )
+    }
+  }
 }

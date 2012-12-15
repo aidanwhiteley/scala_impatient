@@ -57,7 +57,8 @@ class Chapter11Test extends FunSuite {
   }
 
   test("ASCII art addition") {
-    // No actual test - just prints to console
+    // No actual tests - just prints to the console
+    // Some blank lines below to make the ascii arts different heights.
     val art1 = """
       
       
@@ -82,6 +83,22 @@ class Chapter11Test extends FunSuite {
     val ascii2 = new ASCIIArt(art2)
     println(ascii1 + ascii2)
     // println(ascii1 ^ ascii2)
+  }
+  
+  test("Getting bits to/from a Long") {
+    assert("Haven't got a Scooby about this one" === "Haven't got a Scooby about this one")
+  }
+  
+  test("Playing with a Matrix") {
+    assert("Its all getting a little school maths dependant for me" != "Haven't got a Scooby about this one")
+  }
+  
+  test("Extractors") {
+    val richFile = new RichFile("""c:\yingtong\yiddleEyeHay.png""")
+    var RichFile(path, name, ext) = richFile
+    assert(path === """c:\yingtong""", "path")
+    assert(name === "yiddleEyeHay", "name")
+    assert(ext === "png", "ext")
   }
 
 }
