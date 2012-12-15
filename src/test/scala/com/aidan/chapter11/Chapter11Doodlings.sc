@@ -6,4 +6,5 @@ object Chapter11Doodlings {
   def gcd(a: Int, b: Int) : Int = if (b == 0) scala.math.abs(a) else gcd(b, a % b)
                                                   //> gcd: (a: Int, b: Int)Int
   gcd(3, 6)                                       //> res0: Int = 3
+ 
 }
