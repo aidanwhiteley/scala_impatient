@@ -82,3 +82,36 @@ class Table() {
 object Table {
   def apply() = new Table()
 }
+
+class ASCIIArt(val art: String) {
+  import util.Properties
+  val lines = art.split(Properties.lineSeparator).filterNot(_.isEmpty())
+  val maxWidth = lines.maxBy(_.length()).size 
+  def paddedLines = for (line <- lines) yield (line.padTo(maxWidth, ' '))
+  def heightPaddedLines(linesToAdd: Int) = {
+    (for (i <- (1 to linesToAdd)) yield " ".padTo(maxWidth, ' ')) ++ paddedLines
+  }
+  override def toString = { 
+    paddedLines.mkString(Properties.lineSeparator)
+  }
+  
+  def +(other: ASCIIArt) = {
+    def aFewChars = "      "
+    val heightDifference = this.lines.size - other.lines.size
+    if (heightDifference > 0) {
+      val otherPadded = other.heightPaddedLines(heightDifference)
+      new ASCIIArt(this.paddedLines.zip(otherPadded).map(art => art._1 + aFewChars + art._2).mkString(Properties.lineSeparator))
+    } else if (heightDifference < 0) {
+      val thisPadded = this.heightPaddedLines(scala.math.abs(heightDifference))
+      new ASCIIArt(thisPadded.zip(other.paddedLines).map(art => art._1 + aFewChars + art._2).mkString(Properties.lineSeparator))
+    } else {
+      new ASCIIArt(this.paddedLines.zip(other.paddedLines).map(art => art._1 + aFewChars + art._2).mkString(Properties.lineSeparator))
+    }
+  }
+  
+  def ^(other: ASCIIArt) = {
+    import util.Properties
+    new ASCIIArt(this.toString + Properties.lineSeparator + Properties.lineSeparator + other.toString)
+  }
+  
+}
