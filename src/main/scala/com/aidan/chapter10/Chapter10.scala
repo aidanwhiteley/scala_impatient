@@ -115,9 +115,9 @@ trait Speaker {
   def speak(what: String) = what
 }
 
-trait NoLowerCaseVowelSpeaker extends Speaker {   
+trait NoLowerCaseVowelSpeaker extends Speaker {
   override def speak(what: String) = {
-    val noVowels = what.filter(p => ! Array('a', 'e', 'i', 'o', 'u').contains(p) )
+    val noVowels = what.filter(p => !Array('a', 'e', 'i', 'o', 'u').contains(p))
     super.speak(noVowels.mkString)
   }
 }
@@ -128,18 +128,36 @@ trait LoudSpeaker extends Speaker {
   }
 }
 class Programmer {
-  
+
 }
 
-trait BufferTrait extends java.io.InputStream {
+trait BufferTrait extends java.io.InputStream with Logger {
   val bufferLength: Int
-  override def read : Int = {
-    var content = new Array[Byte](bufferLength)
-    super.read(content, 0, bufferLength)
+  override def read: Int = {
+    val content = new Array[Byte](bufferLength)
+    val dataLength = super.read(content, 0, bufferLength)
+    log("Read " + dataLength + " bytes")
+    dataLength
   }
   def readContent: String = {
-    var content = new Array[Byte](bufferLength)
-    super.read(content, 0, bufferLength)
+    val content = new Array[Byte](bufferLength)
+    val dataLength = super.read(content, 0, bufferLength)
+    log("Read " + dataLength + " bytes")
     (for (ch <- content) yield ch.toChar).mkString
   }
 }
+
+trait Logger {
+  def log(msg: String)
+}
+trait ConsoleLogger extends Logger {
+  def log(msg: String) { println(msg) }
+}
+trait TimestampLogger extends ConsoleLogger {
+  override def log(msg: String) {
+    super.log(new java.util.Date() + " " + msg)
+  }
+}
+
+
+// ************ No IterableInputStream built. Bored with working with java.io ! **********************/

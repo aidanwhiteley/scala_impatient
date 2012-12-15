@@ -78,16 +78,16 @@ class Chapter10Test extends FunSuite {
     assert(nosiyClippedProgrammer.speak("scala is cool") === "SCALA IS COOL")
   }
 
-  test("Using trait to buffer input stream") {
+  test("Using trait to buffer input stream. Also using logger traits") {
     import java.io._
 
     val bLength = 1000
     // Test file has more content than specified buffer size
-    val testStream = new FileInputStream("./src/test/scala/com/aidan/chapter10/myfile.txt") with BufferTrait {
+    val testStream = new FileInputStream("./src/test/scala/com/aidan/chapter10/myfile.txt") with BufferTrait with ConsoleLogger {
       val bufferLength = bLength
     }
     
-    // Of course, the following method is completely useless as the content from teh file isnt accessible!
+    // Of course, the following method is completely useless as the content from the file isnt accessible!
     assert(testStream.read === bLength, "Didnt read expected size of buffered content")
     // So here's a slightly more useful method (ignoring error conditions as usual)
     assert(testStream.readContent.size === bLength, "Didnt get the expected content back")
