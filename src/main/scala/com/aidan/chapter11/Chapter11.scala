@@ -86,17 +86,17 @@ object Table {
 class ASCIIArt(val art: String) {
   import util.Properties
   val lines = art.split(Properties.lineSeparator).filterNot(_.isEmpty())
-  val maxWidth = lines.maxBy(_.length()).size 
+  val maxWidth = lines.maxBy(_.length()).size
   def paddedLines = for (line <- lines) yield (line.padTo(maxWidth, ' '))
   def heightPaddedLines(linesToAdd: Int) = {
     (for (i <- (1 to linesToAdd)) yield " ".padTo(maxWidth, ' ')) ++ paddedLines
   }
-  override def toString = { 
+  override def toString = {
     paddedLines.mkString(Properties.lineSeparator)
   }
-  
+
   def +(other: ASCIIArt) = {
-    def aFewChars = "      "
+    def aFewChars = " " * 7
     val heightDifference = this.lines.size - other.lines.size
     if (heightDifference > 0) {
       val otherPadded = other.heightPaddedLines(heightDifference)
@@ -108,23 +108,34 @@ class ASCIIArt(val art: String) {
       new ASCIIArt(this.paddedLines.zip(other.paddedLines).map(art => art._1 + aFewChars + art._2).mkString(Properties.lineSeparator))
     }
   }
-  
+
   def ^(other: ASCIIArt) = {
     import util.Properties
     new ASCIIArt(this.toString + Properties.lineSeparator + Properties.lineSeparator + other.toString)
   }
 }
 
-class RichFile(val file: String) 
+class RichFile(val file: String)
 object RichFile {
   import util.Properties
   val dirSeparator = Properties.propOrElse("file.separator", "\\")
+
+  /*
   def unapply(input: RichFile) = {
-    if (null == input.file || input.file.isEmpty() || input.file.indexOf(dirSeparator) < 0) None
+    if (null == input || null == input.file || input.file.isEmpty() || input.file.indexOf(dirSeparator) < 0) None
     else {
       val lastSlash = input.file.lastIndexOf(dirSeparator)
       val lastDot = input.file.lastIndexOf(".")
-      Some( (input.file.take(lastSlash), input.file.substring(lastSlash + 1, lastDot), input.file.substring(lastDot + 1)) )
+      Some((input.file.take(lastSlash), input.file.substring(lastSlash + 1, lastDot), input.file.substring(lastDot + 1)))
+    }
+  }
+  */
+  
+  def unapplySeq(input: RichFile): Option[Seq[String]] = {
+    if (null == input || null == input.file || input.file.isEmpty()) None
+    else {
+      // Ignore first item in seq which is the empty data before the first /
+      Some(input.file.trim.split("/").tail)
     }
   }
 }

@@ -90,15 +90,24 @@ class Chapter11Test extends FunSuite {
   }
   
   test("Playing with a Matrix") {
-    assert("Its all getting a little school maths dependant for me" != "Haven't got a Scooby about this one")
+    assert("Its all getting a little school maths dependant for me" != "Haven't got a Scooby about this one either")
   }
   
-  test("Extractors") {
+  // Uncomment the unapply method and comment out the unapplySeq method to be able to run this test.
+  ignore("Extractors") {
     val richFile = new RichFile("""c:\yingtong\yiddleEyeHay.png""")
-    var RichFile(path, name, ext) = richFile
+    val RichFile(path, name, ext) = richFile
     assert(path === """c:\yingtong""", "path")
     assert(name === "yiddleEyeHay", "name")
     assert(ext === "png", "ext")
+  }
+  
+  test("Extractor sequence") {
+    val richFile = new RichFile("/home/cay/readme.txt")
+    val RichFile(first, middle, last) = richFile
+    assert(first === "home", "first")
+    assert(middle === "cay", "middle")
+    assert(last === "readme.txt", "last")
   }
 
 }
