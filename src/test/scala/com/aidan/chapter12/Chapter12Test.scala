@@ -17,4 +17,9 @@ class Chapter12Test extends FunSuite {
     val testArray = Array(4, 7, 22, 1, -4, 8, 21)
     assert(getLargestElementUsingReduceLeft(testArray) === 22, "Reduce left")
   }
+  
+  test("Factorial using reduceLeft and to") {
+    assert(factorial(5) === 120, "5 factorial")
+    assert(factorial(10) === 3628800, "10 factorial")
+  }
 }

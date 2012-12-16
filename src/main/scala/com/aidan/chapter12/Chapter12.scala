@@ -11,5 +11,9 @@ object Chapter12 {
 	def getLargestElementUsingReduceLeft(arr: Array[Int]): Int = {
 	  arr.reduceLeft(_ max _)
 	}
+	
+	def factorial(num: Int) : Long = {
+	  (num to 1 by - 1).reduceLeft(_ * _)
+	}
 }
 
