@@ -13,5 +13,8 @@ class Chapter12Test extends FunSuite {
     assert(values(x => x* x, 2, 3) === Seq( (2, 4), (3, 9)), "2 to 3")
   }
 
-
+  test("Get largest value in array using reduceLeft") {
+    val testArray = Array(4, 7, 22, 1, -4, 8, 21)
+    assert(getLargestElementUsingReduceLeft(testArray) === 22, "Reduce left")
+  }
 }

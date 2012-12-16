@@ -7,5 +7,9 @@ object Chapter12 {
 	  // def createPairs(x: Int) = (x, fun(x))
 	  (low to high).map(x => (x, fun(x))).toList
 	}
+	
+	def getLargestElementUsingReduceLeft(arr: Array[Int]): Int = {
+	  arr.reduceLeft(_ max _)
+	}
 }
 
