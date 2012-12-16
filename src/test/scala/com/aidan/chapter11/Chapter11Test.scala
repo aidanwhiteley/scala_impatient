@@ -94,6 +94,7 @@ class Chapter11Test extends FunSuite {
   }
   
   // Uncomment the unapply method and comment out the unapplySeq method to be able to run this test.
+  // The "extractor sequence" test below will then fail.
   ignore("Extractors") {
     val richFile = new RichFile("""c:\yingtong\yiddleEyeHay.png""")
     val RichFile(path, name, ext) = richFile
