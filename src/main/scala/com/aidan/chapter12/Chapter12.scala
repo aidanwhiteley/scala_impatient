@@ -29,5 +29,23 @@ object Chapter12 {
 	def largestReturnInput(fun: (Int) => Int, inputs: Seq[Int]) = {
 	  (for (input <- inputs) yield (input, fun(input))).reduceLeft((left, right) => if (left._2 > right._2) left else right)._1
 	}
+	
+	def adjustToPair(fun: (Int, Int) => Int) = {
+	  (pair: (Int, Int)) => fun(pair._1, pair._2)
+	}
+	
+	def correspondsWithCurrying(a: Array[String], b: Array[Int]) = {
+	  a.corresponds(b)(_.length == _)
+	}
+	
+	def correspondsNoCurrying(a: Array[String], b: Array[Int], fun : ((String, Int) =>  Boolean)) = {
+	  (for (pair <-  a.zip(b)) yield fun(pair._1, pair._2)).reduceLeft(_ && _)
+	}
+	
+	// Note sure that the first parameter actually needs to be call-by-name for this control abstraction
+	def unless(condition: => Boolean)(codeBlock: => Unit) {
+	  if (!condition) codeBlock
+	}
+	
 }
 
