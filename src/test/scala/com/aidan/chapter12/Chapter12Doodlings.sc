@@ -20,5 +20,9 @@ object Chapter12Doodlings {
  	def mulOneAtATime(x: Int) = (y: Int) => x * y
                                                   //> mulOneAtATime: (x: Int)Int => Int
   mulOneAtATime(4)(5)                             //> res3: Int = 20
+  
+  def f1(x: Int) = (10 * x) - (x * x)             //> f1: (x: Int)Int
+  f1(5)                                           //> res4: Int = 25
+  
  	 
 }

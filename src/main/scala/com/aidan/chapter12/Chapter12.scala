@@ -13,7 +13,21 @@ object Chapter12 {
 	}
 	
 	def factorial(num: Int) : Long = {
-	  (num to 1 by - 1).reduceLeft(_ * _)
+	  // Not sure that factorials for negative integers exist but fact(0) = 1 according to my calculator
+	  if (num < 1) 1
+	  else (num to 1 by - 1).reduceLeft(_ * _)
+	}
+	
+	def factorialTake2(num: Int) : Long = {
+	  (num to 1 by - 1).foldLeft(1)(_ * _)
+	}
+	
+	def largest(fun: (Int) => Int, inputs: Seq[Int]) = {
+	  (for (input <- inputs) yield fun(input)).reduceLeft(_ max _)
+	}
+	
+	def largestReturnInput(fun: (Int) => Int, inputs: Seq[Int]) = {
+	  (for (input <- inputs) yield (input, fun(input))).reduceLeft((left, right) => if (left._2 > right._2) left else right)._1
 	}
 }
 

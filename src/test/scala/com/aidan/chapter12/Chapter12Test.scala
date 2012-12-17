@@ -21,5 +21,22 @@ class Chapter12Test extends FunSuite {
   test("Factorial using reduceLeft and to") {
     assert(factorial(5) === 120, "5 factorial")
     assert(factorial(10) === 3628800, "10 factorial")
+    assert(factorial(0) === 1, "0 factorial")
+  }
+  
+  test("Factorial using foldLeft") {
+    assert(factorialTake2(5) === 120, "5 factorial")
+    assert(factorialTake2(10) === 3628800, "10 factorial")
+    assert(factorialTake2(0) === 1, "0 factorial")
+  }
+  
+  test("Largest function") {
+    def testFunction(x: Int) = 10 * x - x * x
+    assert(largest(testFunction, 1 to 10) === 25)
+  }
+  
+  test("Largest function - return input") {
+    def testFunction(x: Int) = 10 * x - x * x
+    assert(largestReturnInput(testFunction, 1 to 10) === 5)
   }
 }
