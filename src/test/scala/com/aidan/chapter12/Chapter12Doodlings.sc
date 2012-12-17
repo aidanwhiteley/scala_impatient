@@ -25,7 +25,7 @@ object Chapter12Doodlings {
 
   val pairs = (1 to 10) zip (11 to 20)            //> pairs  : scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((1,11), 
                                                   //| (2,12), (3,13), (4,14), (5,15), (6,16), (7,17), (8,18), (9,19), (10,20))
-	(1 to 10).map(_ * 3)                      //> res5: scala.collection.immutable.IndexedSeq[Int] = Vector(3, 6, 9, 12, 15, 1
+  (1 to 10).map(_ * 3)                            //> res5: scala.collection.immutable.IndexedSeq[Int] = Vector(3, 6, 9, 12, 15, 1
                                                   //| 8, 21, 24, 27, 30)
 
 }
