@@ -18,5 +18,10 @@ object Chapter13 {
   def removeZeros(aList: List[Int]) = {
     aList.filterNot(a => a == 0)
   }
+  
+  def findMapValues(anArray : Array[String], aMap: Map[String, Int]) = {
+    val results = (for (elem <- anArray) yield aMap.get(elem))
+    results.flatten
+  }
 }
 

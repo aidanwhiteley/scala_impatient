@@ -30,5 +30,11 @@ class Chapter13Test extends FunSuite {
     val intList = List(1, 0, 4, 5, 0, -1, 7, 0)
     assert(removeZeros(intList) === List(1, 4, 5, -1, 7))
   }
+  
+  test("Arrays, maps and flatMap test") {
+    val testArray = Array("Tom", "Fred", "Harry")
+    val testMap = Map("Tom" -> 3, "Dick" -> 4, "Harry" -> 5)
+    assert(findMapValues(testArray, testMap) === Array(3, 5))
+  }
 
 }
