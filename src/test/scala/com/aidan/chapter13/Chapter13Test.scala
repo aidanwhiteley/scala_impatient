@@ -16,4 +16,11 @@ class Chapter13Test extends FunSuite {
     assert(map('p') === Set(8, 9), "p")
   }
 
+  test("Indexes using immutable maps and sets") {
+    val map = indexesImmutable("Mississippi")
+    assert(map('M') === Set(0), "M")
+    assert(map('i') === Set(1, 4, 7, 10), "i")
+    assert(map('p') === Set(8, 9), "p")
+  }
+
 }
