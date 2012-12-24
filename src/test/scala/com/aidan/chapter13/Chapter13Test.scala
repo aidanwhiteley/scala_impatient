@@ -17,10 +17,18 @@ class Chapter13Test extends FunSuite {
   }
 
   test("Indexes using immutable maps and sets") {
-    val map = indexesImmutable("Mississippi")
+    val map = indexesImmutable("Missouri")
     assert(map('M') === Set(0), "M")
-    assert(map('i') === Set(1, 4, 7, 10), "i")
-    assert(map('p') === Set(8, 9), "p")
+    assert(map('i') === Set(1, 7), "i")
+    assert(map('s') === Set(2, 3), "s")
+    assert(map('o') === Set(4), "o")
+    assert(map('u') === Set(5), "u")
+    assert(map('r') === Set(6), "r")
+  }
+  
+  test("Removing zeroes from a linked list") {
+    val intList = List(1, 0, 4, 5, 0, -1, 7, 0)
+    assert(removeZeros(intList) === List(1, 4, 5, -1, 7))
   }
 
 }

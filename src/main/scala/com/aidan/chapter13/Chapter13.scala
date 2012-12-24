@@ -14,5 +14,9 @@ object Chapter13 {
     for (c <- aString.zipWithIndex) theMap += ( (c._1, theMap.getOrElse(c._1, Set()) + c._2) )
     theMap
   }
+  
+  def removeZeros(aList: List[Int]) = {
+    aList.filterNot(a => a == 0)
+  }
 }
 
