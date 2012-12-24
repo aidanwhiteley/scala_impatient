@@ -36,5 +36,10 @@ class Chapter13Test extends FunSuite {
     val testMap = Map("Tom" -> 3, "Dick" -> 4, "Harry" -> 5)
     assert(findMapValues(testArray, testMap) === Array(3, 5))
   }
+  
+  test("Basic mkString") {
+    val testArray = Array("The", "sands", "of", "time")
+    assert(mkString(testArray, " ") === "The sands of time")
+  }
 
 }

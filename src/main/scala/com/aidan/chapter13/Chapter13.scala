@@ -23,5 +23,9 @@ object Chapter13 {
     val results = (for (elem <- anArray) yield aMap.get(elem))
     results.flatten
   }
+  
+  def mkString(input : Array[String], separator: String) = {
+    input.reduceLeft((a , b) => a + separator + b)
+  }
 }
 
