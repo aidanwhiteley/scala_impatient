@@ -32,5 +32,9 @@ object Chapter13 {
   // Might read better with foldLeft / foldRight
   
   def multiplyTuple = ((price: Double, quantity: Int) => price * quantity).tupled
+  
+  def arrayGroup(input: Array[Int], columns: Int) = {
+    input.grouped(columns).toArray
+  }
 }
 

@@ -51,4 +51,9 @@ class Chapter13Test extends FunSuite {
     assert( (theZip map (multiplyTuple(_))) === List(50.0, 40.0, 9.95), "Tupled solution")
   }
 
+  test("Arrays and grouped") {
+    val input = Array(1, 2, 3, 4, 5, 6)
+    val expectedOutput = Array(Array(1, 2, 3), Array(4, 5, 6))
+    assert(arrayGroup(input, 3) === expectedOutput)
+  }
 }
