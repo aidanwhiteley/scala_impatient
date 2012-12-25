@@ -41,5 +41,14 @@ class Chapter13Test extends FunSuite {
     val testArray = Array("The", "sands", "of", "time")
     assert(mkString(testArray, " ") === "The sands of time")
   }
+  
+  test("Zipping and Tuples") {
+    val prices = List(5.0, 20.0, 9.95)
+    val quantities = List(10, 2, 1)
+    val theZip = prices zip quantities
+    assert( (theZip map ({ p => p._1 * p._2})) === List(50.0, 40.0, 9.95), "Book solution")
+    
+    assert( (theZip map (multiplyTuple(_))) === List(50.0, 40.0, 9.95), "Tupled solution")
+  }
 
 }

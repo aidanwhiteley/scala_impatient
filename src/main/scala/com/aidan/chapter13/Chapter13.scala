@@ -27,5 +27,10 @@ object Chapter13 {
   def mkString(input : Array[String], separator: String) = {
     input.reduceLeft((a , b) => a + separator + b)
   }
+  
+  // Exercise 6 not implemented. Looks like line noise rather than Scala to me. 
+  // Might read better with foldLeft / foldRight
+  
+  def multiplyTuple = ((price: Double, quantity: Int) => price * quantity).tupled
 }
 
