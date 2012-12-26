@@ -44,5 +44,18 @@ class Chapter14Test extends FunSuite {
     val aList: List[Any] = List(List(3, 8), 2, List(5))
     assert(leafSum(aList) === 18)
   }
+  
+  test("Shallow binary tree") {
+    val leaf1 = Leaf(4)
+    val leaf2 = Leaf(5)
+    val node = Node(leaf1, leaf2)
+    
+    assert(leafSum(node, 0) === 9)
+  }
+  
+  test("Deeper binary tree") {
+    val testData = NodeMultiple(NodeMultiple(Leaf(3), Leaf(8)), Leaf(2), NodeMultiple(Leaf(5)))
+    assert(leafSum(testData, 0) === 18)
+  }
 
 }
