@@ -20,5 +20,24 @@ class Chapter14Test extends FunSuite {
     assert(swapArray(Array(1)) === Array(1), "One array")
     assert(swapArray(Array()) === Array(), "Zero array")
   }
+  
+  test("Prices of multiple") {
+    // Test Articles and Bundles first
+    val article1 = Article("art 1", 10.00)
+    val article2 = Article("art 2", 15.50)
+    val bundle1 = Bundle("bundle 1", 3.50, article1, article2)
+    assert(price(article2) === 15.50, "article 1 price")
+    assert(price(bundle1) === 22.00, "article 1 price")
+    
+    // Now test Multiples
+    val multiples1 = Multiple(10, Article("Blackwell Toaster", 29.95))
+    assert(price(multiples1) === 299.50, "multiple 1 price")
+    
+    val multiples2 = Multiple(5, bundle1)
+    assert(price(multiples2) === 110.00, "multiple 2 price")
+    
+    val multiples3 = Multiple(2, multiples1)
+    assert(price(multiples3) === 599.00, "multiple 3 price")
+  }
 
 }
