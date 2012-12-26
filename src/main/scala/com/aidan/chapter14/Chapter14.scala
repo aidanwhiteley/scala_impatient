@@ -19,6 +19,16 @@ object Chapter14 {
     case Bundle(_, disc, its @ _*) => its.map(price _).sum - disc
     case Multiple(n, item) => n * price(item)
   }
+  
+  def leafSum(aList: List[Any]) : Int = {
+    (for (elem <- aList) yield {
+      elem match {
+        case x: Int => x
+        case y: List[_] => leafSum(y)
+        case _ => 0
+      }
+    }).sum
+  }
 }
 
 sealed abstract class Item

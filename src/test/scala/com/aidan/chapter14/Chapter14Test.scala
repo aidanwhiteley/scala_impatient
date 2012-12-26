@@ -39,5 +39,10 @@ class Chapter14Test extends FunSuite {
     val multiples3 = Multiple(2, multiples1)
     assert(price(multiples3) === 599.00, "multiple 3 price")
   }
+  
+  test("List Any") {
+    val aList: List[Any] = List(List(3, 8), 2, List(5))
+    assert(leafSum(aList) === 18)
+  }
 
 }
