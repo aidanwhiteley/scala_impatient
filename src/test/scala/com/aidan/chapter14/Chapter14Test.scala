@@ -62,5 +62,10 @@ class Chapter14Test extends FunSuite {
     val testData = SignedNodeMultiple('+', SignedNodeMultiple('*', Leaf(3), Leaf(8)), Leaf(2), SignedNodeMultiple('-', Leaf(5)))
     assert(eval(testData) === 21)
   }
+  
+  test("Sum non None values in List") {
+    val list: List[Option[Int]] = List(Some(1), None, Some(6), None)
+    assert(listSum(list) === 7)
+  }
 
 }

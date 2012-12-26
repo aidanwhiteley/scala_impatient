@@ -53,6 +53,10 @@ object Chapter14 {
       case _ => throw new IllegalArgumentException("Didnt expect that!")
     }
   }
+  
+  def listSum(list: List[Option[Int]]) = {
+    (for (elem <- list) yield elem.getOrElse(0)).sum
+  }
 }
 
 sealed abstract class Item
