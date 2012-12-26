@@ -55,7 +55,12 @@ class Chapter14Test extends FunSuite {
   
   test("Deeper binary tree") {
     val testData = NodeMultiple(NodeMultiple(Leaf(3), Leaf(8)), Leaf(2), NodeMultiple(Leaf(5)))
-    assert(leafSum(testData, 0) === 18)
+    assert(leafSum(testData) === 18)
+  }
+  
+  test("Test eval on Tree") {
+    val testData = SignedNodeMultiple('+', SignedNodeMultiple('*', Leaf(3), Leaf(8)), Leaf(2), SignedNodeMultiple('-', Leaf(5)))
+    assert(eval(testData) === 21)
   }
 
 }

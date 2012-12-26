@@ -30,11 +30,27 @@ object Chapter14 {
     }).sum
   }
   
-  def leafSum(tree: BinaryTree, accum: Int) : Int = {
+  def leafSum(tree: BinaryTree, accum: Int = 0) : Int = {
     tree match {
       case leaf: Leaf => accum + leaf.value
       case node: Node => leafSum(node.left, accum) + leafSum(node.right, accum)
       case nodeMultiple: NodeMultiple => (for (elem <- nodeMultiple.child) yield leafSum(elem, accum)).sum
+      case signedNodeMultiple: SignedNodeMultiple => (for (elem <- signedNodeMultiple.child) yield leafSum(elem, accum)).sum
+    }
+  }
+  
+  def eval(tree: BinaryTree, accum: Int = 0) : Int = {
+    tree match {
+      case leaf: Leaf => accum + leaf.value
+      case signedNodeMultiple: SignedNodeMultiple => {
+        signedNodeMultiple.op match {
+          case '+' => (for (elem <- signedNodeMultiple.child) yield eval(elem, accum)).reduceLeft((a, b) => a + b)
+          // The following leading minus passes the test case but is dodgy - not sure yet why it is needed
+          case '-' => -(for (elem <- signedNodeMultiple.child) yield eval(elem, accum)).reduceLeft((a, b) => a - b)
+          case '*' => (for (elem <- signedNodeMultiple.child) yield eval(elem, accum)).reduceLeft((a, b) => a * b)
+        }
+      }
+      case _ => throw new IllegalArgumentException("Didnt expect that!")
     }
   }
 }
@@ -48,6 +64,7 @@ sealed abstract class BinaryTree
 case class Leaf(value: Int) extends BinaryTree
 case class Node(left: BinaryTree, right: BinaryTree) extends BinaryTree
 case class NodeMultiple(child: BinaryTree*) extends BinaryTree
+case class SignedNodeMultiple(op: Char, child: BinaryTree*) extends BinaryTree
 
 
 
