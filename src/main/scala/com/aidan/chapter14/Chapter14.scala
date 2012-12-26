@@ -57,6 +57,8 @@ object Chapter14 {
   def listSum(list: List[Option[Int]]) = {
     (for (elem <- list) yield elem.getOrElse(0)).sum
   }
+  
+  // Exercise 10 - not done - didn't understand the requirements!
 }
 
 sealed abstract class Item
