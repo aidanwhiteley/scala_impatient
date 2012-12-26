@@ -1,5 +1,4 @@
 <h1>Project Details</h1>
-<p><a href="http://aidanwhiteley.github.com/scala_impatient/">Pretty version of this page</a>.</p>
 <h2>Scala For The Impatient Exercises</h1>
 <p>
 This repository contains some sample solutions to the exercises in Cay Hortsmann's book
@@ -10,7 +9,7 @@ Like everything else, it is a work in progress. It contains progress to date not
 I haven't spent the time to create solutions for those exercises that either:
 </p>
 <ul>
-<li>don't really interest me - e.g. the exercises for the chapter on packages</li>
+<li>don't really interest me - e.g. exercises for the chapters on packages and annotations</li>
 <li>exercises that don't readily allow test driven development - e.g. those that just want output printed to the console (albeit I've converted many of these to return testable Strings)</li>
 </ul>
 <h3>Is it any good?</h3>
@@ -37,4 +36,9 @@ and then the project files created using
 
 <h2>Git and GitHub</h2>
 <p>As a long term Subversion user, I am using this project to learn Git and GitHub. Apologies for any faux pas!
+</p>
+
+<h2>Acknowledgements</h2>
+<p>There are plenty of GitHub repositories that contain exercises for one or two chapters of Scala For The Impatient.
+Alexander Mikhailov's <a href="https://github.com/hempalex/scala-impatient">repository</a> proved a more useful source of inspiration/ideas when stuck! 
 </p>
