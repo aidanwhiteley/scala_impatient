@@ -5,6 +5,21 @@ import org.scalatest.FunSuite
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
+/*
+ * 
+ * 
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * !!!!! Warning:                                                 !!!!!!
+ * !!!!! Scala files should be in UTF-8 format anyway but some    !!!!!!
+ * !!!!! of the tests in this file will fail if this file and the !!!!!!
+ * !!!!! corresponding Chapter6.scala file aren't in UTF-8        !!!!!!
+ * !!!!! format.                                                  !!!!!!
+ * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * 
+ * 
+ * 
+ */
+
 @RunWith(classOf[JUnitRunner])
 class Chapter6Test extends FunSuite {
   import com.aidan.chapter6.Chapter6._
