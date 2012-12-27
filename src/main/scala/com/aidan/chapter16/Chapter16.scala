@@ -2,6 +2,7 @@ package com.aidan.chapter16
 
 import scala.xml._
 import scala.xml.parsing._
+import scala.xml.transform._
 
 object Chapter16 {
 
@@ -63,13 +64,29 @@ object Chapter16 {
   
   def buildMapFromDlList(elem: Elem) = {
     var map = Map[String, String]()
-    
     val dts = elem \ "dt"
     val dds = elem \ "dd"
     if ( (dts == null || dds == null) || (dts.length != dds.length) ) throw new IllegalArgumentException(elem.toString)
     
     for (i <- 0 to dts.length - 1) map += (dts(i).text -> dds(i).text)
     map
+  }
+  
+  /**
+   * A very slow omplementation - 1/2 second on my well specced PC!
+   */
+  def transformDoc(fileName: String) = {
+    val root = readFromFile(fileName)
+    
+    val rule1 = new RewriteRule {
+      override def transform(n: Node) = n match {
+        case e @ <img/> if (e.attributes("alt") == null) => e.asInstanceOf[Elem] % Attribute(null, "alt", "TODO", Null)
+        case _ => n
+      }
+      
+    }
+    val transformed = new RuleTransformer(rule1).transform(root)
+    transformed.toString
   }
   
   private def readFromFile(fileName: String): scala.xml.Node = {

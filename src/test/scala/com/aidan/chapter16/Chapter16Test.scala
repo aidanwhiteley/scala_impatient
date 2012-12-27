@@ -62,4 +62,13 @@ class Chapter16Test extends FunSuite {
   test("Building a Map from a definition list") {
     assert(buildMapFromDlList(<dl><dt>A</dt><dd>1</dd><dt>B</dt><dd>2</dd></dl>) === Map("A" -> "1", "B" -> "2"))
   }
+  
+  test("Transforming a document - adding TODOs") {
+    val transformed = transformDoc("./src/test/scala/com/aidan/chapter16/xhtmlFile1.html")
+    val occurrences = transformed.split("TODO").size - 1
+    // Only 2 occurrences in test file of images without alt text
+    assert(occurrences === 2)
+  }
+  
+  // TODO - maybe - Haven't implemented exercise 10..
 }
