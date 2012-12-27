@@ -61,6 +61,17 @@ object Chapter16 {
     dl
   }
   
+  def buildMapFromDlList(elem: Elem) = {
+    var map = Map[String, String]()
+    
+    val dts = elem \ "dt"
+    val dds = elem \ "dd"
+    if ( (dts == null || dds == null) || (dts.length != dds.length) ) throw new IllegalArgumentException(elem.toString)
+    
+    for (i <- 0 to dts.length - 1) map += (dts(i).text -> dds(i).text)
+    map
+  }
+  
   private def readFromFile(fileName: String): scala.xml.Node = {
     val loader = new NoBindingFactoryAdapter with NoDtdResolution
     val root = loader.loadFile(fileName)

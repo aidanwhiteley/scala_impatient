@@ -58,4 +58,8 @@ class Chapter16Test extends FunSuite {
   test("Building a definition list from a Map") {
     assert(buildDlList(Map("A" -> "1", "B" -> "2")) === <dl><dt>A</dt><dd>1</dd><dt>B</dt><dd>2</dd></dl>)
   }
+  
+  test("Building a Map from a definition list") {
+    assert(buildMapFromDlList(<dl><dt>A</dt><dd>1</dd><dt>B</dt><dd>2</dd></dl>) === Map("A" -> "1", "B" -> "2"))
+  }
 }

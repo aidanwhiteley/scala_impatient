@@ -11,4 +11,5 @@ object Chapter16Doodlings {
   
   val test3 = <li>{Text("Fred")}</li> match { case <li>{Text(t)}</li> => t}
                                                   //> test3  : String = Fred
+
 }
