@@ -66,8 +66,8 @@ object Suit extends Enumeration {
   val Diamonds = Value("♦")
   val Hearts = Value("♥")
   val Spades = Value("♠")
-  
-  def isRed(suit: Suit.Value) : Boolean = {
+
+  def isRed(suit: Suit.Value): Boolean = {
     suit == Suit.Diamonds || suit == Suit.Hearts
   }
 }

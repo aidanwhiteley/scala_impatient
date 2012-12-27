@@ -12,7 +12,7 @@ object Chapter9 {
    * Im not that happy that any of the following file handling methods are best practise.
    * I want to get the resource de-allocation in finally blocks but
    * that seems to mean using mutable variables.
-   * 
+   *
    * Think this all needs looking at again.
    */
   def readFileAsArray(fileName: String): Array[String] = {
@@ -105,11 +105,11 @@ object Chapter9 {
     val children = dir.listFiles.filter(_.isDirectory())
     children.toIterator ++ children.toIterator.flatMap(subdirs _)
   }
-  
+
   def countFilesByFileType(directory: String, fileSuffix: String) = {
     for (d <- subdirs(new File(directory)); f <- d.listFiles if f.toString.endsWith(fileSuffix)) yield f.toString
   }
-  
+
   /*
    * I can't see that there is any situation where I'd willingly use Java serialisation again 
    * in the future (compared to using something like Google Protocol Buffers).

@@ -130,7 +130,7 @@ object RichFile {
     }
   }
   */
-  
+
   def unapplySeq(input: RichFile): Option[Seq[String]] = {
     if (null == input || null == input.file || input.file.isEmpty()) None
     else {

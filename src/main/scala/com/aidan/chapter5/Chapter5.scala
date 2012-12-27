@@ -30,7 +30,7 @@ class Time(val hrs: Int, val min: Int) {
   }
 }
 
-class Student(@BeanProperty var name: String, @BeanProperty var id: Long) 
+class Student(@BeanProperty var name: String, @BeanProperty var id: Long)
 
 class Person(var age: Int) {
   if (age < 0) age = 0;

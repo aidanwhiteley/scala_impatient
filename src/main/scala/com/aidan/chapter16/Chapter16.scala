@@ -47,48 +47,48 @@ object Chapter16 {
     val list = root \\ "img" \\ "@src"
     (for (src <- list) yield src.toString).toList
   }
-  
+
   def findHyperLinks(fileName: String): List[(String, String)] = {
     val root = readFromFile(fileName)
     val list = root \\ "a"
-    
+
     // The src attribute cannot hold entity references
     (for (src <- list) yield (src.attributes("href").text, src.text)).toList
   }
-  
+
   def buildDlList(map: Map[String, String]) = {
-    {for ((k, v) <- map) yield <dt>{k}</dt><dd>{v}</dd>}
-    val dl = <dl>{for ((k, v) <- map) yield <dt>{k}</dt><dd>{v}</dd>}</dl>
+    { for ((k, v) <- map) yield <dt>{ k }</dt><dd>{ v }</dd> }
+    val dl = <dl>{ for ((k, v) <- map) yield <dt>{ k }</dt><dd>{ v }</dd> }</dl>
     dl
   }
-  
+
   def buildMapFromDlList(elem: Elem) = {
     var map = Map[String, String]()
     val dts = elem \ "dt"
     val dds = elem \ "dd"
-    if ( (dts == null || dds == null) || (dts.length != dds.length) ) throw new IllegalArgumentException(elem.toString)
-    
+    if ((dts == null || dds == null) || (dts.length != dds.length)) throw new IllegalArgumentException(elem.toString)
+
     for (i <- 0 to dts.length - 1) map += (dts(i).text -> dds(i).text)
     map
   }
-  
+
   /**
    * A very slow omplementation - 1/2 second on my well specced PC!
    */
   def transformDoc(fileName: String) = {
     val root = readFromFile(fileName)
-    
+
     val rule1 = new RewriteRule {
       override def transform(n: Node) = n match {
         case e @ <img/> if (e.attributes("alt") == null) => e.asInstanceOf[Elem] % Attribute(null, "alt", "TODO", Null)
         case _ => n
       }
-      
+
     }
     val transformed = new RuleTransformer(rule1).transform(root)
     transformed.toString
   }
-  
+
   private def readFromFile(fileName: String): scala.xml.Node = {
     val loader = new NoBindingFactoryAdapter with NoDtdResolution
     val root = loader.loadFile(fileName)

@@ -38,10 +38,10 @@ object Chapter2 {
   }
 
   def product(s: String) = asUnicode(s)
-  
+
   def productR(s: String): Long = {
     if (null == s || s.isEmpty()) 1L
-    else  {
+    else {
       s.take(1).charAt(0) * productR(s.drop(1))
     }
   }

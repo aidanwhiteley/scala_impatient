@@ -6,21 +6,21 @@ object Chapter14 {
       case (x, y) => (y, x)
     }
   }
-  
+
   def swapArray(anArray: Array[Int]) = {
     anArray match {
       case Array(x, y, rest @ _*) => Array(y, x) ++ rest
       case _ => anArray
     }
   }
-  
-  def price(it: Item) : Double = it match {
+
+  def price(it: Item): Double = it match {
     case Article(_, p) => p
     case Bundle(_, disc, its @ _*) => its.map(price _).sum - disc
     case Multiple(n, item) => n * price(item)
   }
-  
-  def leafSum(aList: List[Any]) : Int = {
+
+  def leafSum(aList: List[Any]): Int = {
     (for (elem <- aList) yield {
       elem match {
         case x: Int => x
@@ -29,8 +29,8 @@ object Chapter14 {
       }
     }).sum
   }
-  
-  def leafSum(tree: BinaryTree, accum: Int = 0) : Int = {
+
+  def leafSum(tree: BinaryTree, accum: Int = 0): Int = {
     tree match {
       case leaf: Leaf => accum + leaf.value
       case node: Node => leafSum(node.left, accum) + leafSum(node.right, accum)
@@ -38,8 +38,8 @@ object Chapter14 {
       case signedNodeMultiple: SignedNodeMultiple => (for (elem <- signedNodeMultiple.child) yield leafSum(elem, accum)).sum
     }
   }
-  
-  def eval(tree: BinaryTree, accum: Int = 0) : Int = {
+
+  def eval(tree: BinaryTree, accum: Int = 0): Int = {
     tree match {
       case leaf: Leaf => accum + leaf.value
       case signedNodeMultiple: SignedNodeMultiple => {
@@ -53,11 +53,11 @@ object Chapter14 {
       case _ => throw new IllegalArgumentException("Didnt expect that!")
     }
   }
-  
+
   def listSum(list: List[Option[Int]]) = {
     (for (elem <- list) yield elem.getOrElse(0)).sum
   }
-  
+
   // Exercise 10 - not done - didn't understand the requirements!
 }
 

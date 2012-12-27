@@ -44,16 +44,16 @@ object Chapter4 {
     var wordMap = new java.util.TreeMap[String, Int]
     while (inFile.hasNext()) {
       val aWord = inFile.next()
-      var count = wordMap.get(aWord)	// Null handling???
-      wordMap.put(aWord , count + 1)
+      var count = wordMap.get(aWord) // Null handling???
+      wordMap.put(aWord, count + 1)
     }
-    
+
     import collection.JavaConversions.mapAsScalaMap
     val returnMap: scala.collection.mutable.Map[String, Int] = wordMap
     returnMap
   }
-  
-  def getDaysOfWeek() : LinkedHashMap[String, Int] = {
+
+  def getDaysOfWeek(): LinkedHashMap[String, Int] = {
     val days = scala.collection.mutable.LinkedHashMap(
       "Monday" -> java.util.Calendar.MONDAY,
       "Tuesday" -> java.util.Calendar.TUESDAY,
@@ -61,21 +61,20 @@ object Chapter4 {
       "Thursday" -> java.util.Calendar.THURSDAY,
       "Friday" -> java.util.Calendar.FRIDAY,
       "Saturday" -> java.util.Calendar.SATURDAY,
-      "Sunday" -> java.util.Calendar.SUNDAY
-    )
+      "Sunday" -> java.util.Calendar.SUNDAY)
     days
   }
-  
-  def getSysProperties() : scala.collection.Map[String, String] = {
-    import collection.JavaConversions.propertiesAsScalaMap 
+
+  def getSysProperties(): scala.collection.Map[String, String] = {
+    import collection.JavaConversions.propertiesAsScalaMap
     val props: scala.collection.Map[String, String] = System.getProperties()
     props
   }
-  
-  def getMinMax(theArray : Array[Int]) = {
+
+  def getMinMax(theArray: Array[Int]) = {
     (theArray.min, theArray.max)
   }
-  
+
   def lteqgt(values: Array[Int], v: Int) = {
     (values.count(_ < v), values.count(_ == v), values.count(_ > v))
   }

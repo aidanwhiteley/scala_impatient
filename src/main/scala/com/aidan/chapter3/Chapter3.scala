@@ -70,7 +70,7 @@ object Chapter3 {
   def getFlavors(): Buffer[String] = {
     import java.awt.datatransfer._
     import collection.JavaConversions._
-    
+
     val flavors = SystemFlavorMap.getDefaultFlavorMap().asInstanceOf[SystemFlavorMap]
     val natives = flavors.getNativesForFlavor(DataFlavor.imageFlavor)
     natives

@@ -4,28 +4,28 @@ object Chapter8 {}
 
 class BankAccount(initialBalance: Double) {
   private var balance = initialBalance
-  def deposit(amount: Double) = { balance += amount; balance }
-  def withdraw(amount: Double) = { balance -= amount; balance }
+  def deposit(amount: Double) : Double = { balance += amount; balance }
+  def withdraw(amount: Double) : Double = { balance -= amount; balance }
 }
 
 class CheckingAccount(initialBalance: Double) extends BankAccount(initialBalance) {
-  override def deposit(amount: Double) = { super.deposit(amount - checkingAccountCharge) }
-  override def withdraw(amount: Double) = { super.withdraw(amount + checkingAccountCharge) }
+  override def deposit(amount: Double) : Double = { super.deposit(amount - checkingAccountCharge) }
+  override def withdraw(amount: Double) : Double = { super.withdraw(amount + checkingAccountCharge) }
 }
 
 class SavingsAccount(initialBalance: Double) extends BankAccount(initialBalance) {
   private var xtnsThisMonth: Int = 0
-  override def deposit(amount: Double) = {
+  override def deposit(amount: Double) : Double = {
     xtnsThisMonth += 1
     val xtnCharge = if (xtnsThisMonth > 3) savingsAccountCharge else 0
     super.deposit(amount - xtnCharge)
   }
-  override def withdraw(amount: Double) = {
+  override def withdraw(amount: Double) : Double = {
     xtnsThisMonth += 1
     val xtnCharge = if (xtnsThisMonth > 3) savingsAccountCharge else 0
     super.withdraw(amount + xtnCharge)
   }
-  def earnMonthlyInterest = {
+  def earnMonthlyInterest : Double = {
     xtnsThisMonth = 0;
     // This next line is a terrible hack as a work around to the base class
     // definition of balance being private rather than protected. Could have
@@ -46,8 +46,8 @@ class SimpleItem(override val price: Double, override val description: String) e
 class Bundle(val description: String) {
   import scala.collection.mutable.ArrayBuffer
   val items = ArrayBuffer[Item]()
-  def addItem(anItem: Item) = items += anItem
-  def price = (for (item <- items) yield item.price).sum
+  def addItem(anItem: Item) : ArrayBuffer[Item] = items += anItem
+  def price : Double  = (for (item <- items) yield item.price).sum
 }
 
 class Point(val x: Double, val y: Double) {
@@ -56,10 +56,10 @@ class Point(val x: Double, val y: Double) {
     if (that == null) false
     else that.x == x && that.y == y
   }
-  final override def hashCode = 13 * x.toInt * 17 * y.toInt
+  final override def hashCode : Int = 13 * x.toInt * 17 * y.toInt
 }
 object Point {
-  def apply(x: Double, y: Double) = new Point(x, y)
+  def apply(x: Double, y: Double) : Point = new Point(x, y)
 }
 class LabeledPoint(val description: String, x: Double, y: Double) extends Point(x, y)
 
