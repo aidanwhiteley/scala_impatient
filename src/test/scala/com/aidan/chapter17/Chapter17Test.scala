@@ -52,4 +52,7 @@ class Chapter17Test extends FunSuite {
     assert(middle(aList) === 4)
   }
 
+  // TODO - implement exercise 9
+  
+  // TODO - implement exercise 10
 }
