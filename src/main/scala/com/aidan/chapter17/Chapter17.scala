@@ -1,11 +1,13 @@
 package com.aidan.chapter17
 
 object Chapter17 {
+  
   def middle[T](iter: Iterable[T]) = {
     val midPoint = (iter.size / 2) + 1
     val result = iter.take(midPoint).last
     result
   }
+
 }
 
 class Pair[T, S](val first: T, val second: S) {
@@ -26,11 +28,9 @@ class MutablePair[T](var first: T, var second: T) {
     this.second = temp
     this
   }
-  // Ex 8.
-  // Changed method signature so that R must be a sub-type of T
-  def replaceFirst[R <: T](newFirst: R) {
-    first = newFirst
-  }
+  //def replaceFirst[R >: T](newFirst: R) {
+  //  first = newFirst
+  //}
 }
 
 class Person(val name: String = "Mr Person")  
@@ -40,3 +40,5 @@ class PairB[T](val first: T, second: T) {
   def replaceFirst(newFirst: T) = new PairB[T](newFirst, second)
   def replaceFirstWithSuperType[R >: T](newFirst: R) = new PairB[R](newFirst, second)
 }
+
+
