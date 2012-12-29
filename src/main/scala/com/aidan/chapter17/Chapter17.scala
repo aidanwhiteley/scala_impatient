@@ -33,10 +33,14 @@ class MutablePair[T](var first: T, var second: T) {
   }
 }
 
-class Person(val name: String = "Mr Person")  
+class Person(val name: String = "Mr Person")
 class Student(override val name: String = "Mr Student") extends Person
 
 class PairB[T](val first: T, second: T) {
   def replaceFirst(newFirst: T) = new PairB[T](newFirst, second)
   def replaceFirstWithSuperType[R >: T](newFirst: R) = new PairB[R](newFirst, second)
 }
+
+  // TODO - implement exercise 9
+  
+  // TODO - implement exercise 10

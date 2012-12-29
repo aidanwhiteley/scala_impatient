@@ -49,7 +49,9 @@ class Chapter17Test extends FunSuite {
   test("Middle element from Iterable[T]") {
     assert(middle("World") === 'r')
     val aList = List(1, 2, 3, 4, 5, 6, 7)
-    assert(middle(aList) === 4)
+    expectResult(4) {
+      middle(aList)
+    }
   }
 
   // TODO - implement exercise 9
