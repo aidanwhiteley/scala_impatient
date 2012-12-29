@@ -35,4 +35,16 @@ class Chapter18Test extends FunSuite {
       "Title: Scala for the Impatient Author: Cay Horstmann")
   }
 
+  test("Type projection and Network membership") {
+    val chatter = new Network
+    val myFace = new Network
+    
+    val fred = chatter.join("Fred")
+    val barney = myFace.join("Barney")
+    fred.contacts += barney // allowed due to type projection on contacts type
+    val penny = chatter.join("penny")
+    
+    assert(fred == penny, "Fred is equal to Penny")	// According to the well odd definition that two members are equal if in the same network!!!!
+    assert(fred != barney, "But Fred is not equal to Barney")	// In different networks
+  }
 }

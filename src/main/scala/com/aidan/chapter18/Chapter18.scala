@@ -1,11 +1,14 @@
 package com.aidan.chapter18
 
+import scala.collection.mutable.ArrayBuffer
+
 object Chapter18 {
 
 }
-object show  
-object then  
-object around  
+
+object show
+object then
+object around
 
 class Bug {
   sealed abstract class Direction
@@ -35,7 +38,7 @@ class Bug {
     print(location + " ")
     this
   }
-  
+
   def and: this.type = {
     this
   }
@@ -50,8 +53,8 @@ class Document {
   def set(obj: Title.type): this.type = { useNextArgs = obj; this }
   def set(obj: Author.type): this.type = { useNextArgs = obj; this }
   def to(arg: String): this.type = {
-    if (useNextArgs == Title) {title = arg; this}
-    else if (useNextArgs == Author) {author = arg; this}
+    if (useNextArgs == Title) { title = arg; this }
+    else if (useNextArgs == Author) { author = arg; this }
     else this
   }
   override def toString = {
@@ -59,3 +62,22 @@ class Document {
   }
 }
 class Book extends Document
+
+class Network {
+  outerClass =>
+  class Member(val name: String) {
+    val contacts = new ArrayBuffer[Network#Member]
+    val whichNetwork = outerClass
+    override def equals(that: Any) = {
+      // Not bothering with all the additional null / same type checks normally needed when 
+      // implementing equals. Or doing a hashCode.
+      if (outerClass == that.asInstanceOf[Member].whichNetwork) true else false
+    }
+  }
+  private val members = new ArrayBuffer[Member]
+  def join(name: String) = {
+    val m = new Member(name)
+    members += m
+    m
+  }
+}
