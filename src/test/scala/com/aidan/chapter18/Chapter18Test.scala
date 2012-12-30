@@ -83,4 +83,12 @@ class Chapter18Test extends FunSuite {
       case Left(x) => assert(x === 5)
     }
   }
+  
+  test("Writing a method signature that only accepts objects ith close() method") {
+    val testClass = new ClassWithClose
+    gimmeObjectsWithCloseMethod(testClass)
+    assert(testClass.closed, "Checking close called OK")
+    
+    // gimmeObjectsWithCloseMethod("Wont compile - no close() on a String")
+  }
 }
