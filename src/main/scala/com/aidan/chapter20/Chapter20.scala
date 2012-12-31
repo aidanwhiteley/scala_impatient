@@ -61,7 +61,7 @@ class ResultsCollaterActor(val numActors: Int) extends Actor {
             println("Results collation Actor says the overall average: " + results.sum / results.size)
           }
         }
-        case _ => "Not expected!"
+        case _ => throw new IllegalArgumentException("Not expected message to ResultsCollaterActor!")
       }
     } 
   }
