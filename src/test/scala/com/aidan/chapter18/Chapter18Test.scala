@@ -76,19 +76,39 @@ class Chapter18Test extends FunSuite {
       case Right(x) => assert(x === 1)
       case Left(x) => assert(false, "Expected to find exact match. Returned value was: " + x)
     }
-    
+
     val result2 = indexIntoList(intList, 13)
     result2 match {
       case Right(x) => assert(false, "Did not expect to find exact match. Returned value was: " + x)
       case Left(x) => assert(x === 5)
     }
   }
-  
+
   test("Writing a method signature that only accepts objects ith close() method") {
     val testClass = new ClassWithClose
     gimmeObjectsWithCloseMethod(testClass)
     assert(testClass.closed, "Checking close called OK")
-    
+
     // gimmeObjectsWithCloseMethod("Wont compile - no close() on a String")
   }
+
+  test("Function that takes an apply int => int parameter") {
+    assert(printValues((x: Int) => x * x, 3, 6) === List(9, 16, 25, 36))
+    assert(printValues(Array(1, 1, 2, 3, 5, 8, 13, 21, 34, 55), 3, 6) === List(3, 5, 8, 13))
+
+    // Won't compile as String does have apply(x: Int) => Int method
+    // printValues("A String", 2, 4)
+  }
+  
+  test("Adding various Dimension objects together") {
+    val s1 = new Seconds(10.0)
+    val s2 = new Seconds(5.5)
+    assert((s1 + s2).toString === "15.5 s")
+    
+    val m1 = new Meters(6.6)
+    // The following should be prevented from compiling - adding seconds to meters!	
+    // assert((s1 + m1).toString === "16.6 s")
+  }
+  
+  // TODO - construct and example for Exercise 10
 }

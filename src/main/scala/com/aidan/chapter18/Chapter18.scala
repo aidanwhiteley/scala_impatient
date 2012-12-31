@@ -31,6 +31,11 @@ object Chapter18 {
     if (System.currentTimeMillis() % 2 == 0)
       throw new Exception("Just because we can")
   }
+  
+  def printValues(applyCapableObj: { def apply(anInt: Int): Int }, from: Int, upto: Int) = {
+    // Not checking for sensible input values of from and upto!!!
+    for (i <- from to upto) yield applyCapableObj(i)
+  }
 }
 
 object show
@@ -115,4 +120,21 @@ class Network {
 class ClassWithClose {
   var closed = false
   def close(): Unit = closed = true
+}
+
+trait Dim[T] {
+  this: T =>
+  val value: Double
+  val name: String
+  protected def create(v: Double): T
+  def +(other: Dim[T]) = create(value + other.value)
+  override def toString() = value + " " + name
+}
+class Seconds(val value: Double) extends Dim[Seconds] {
+  val name = "s"
+  override def create(v: Double) = new Seconds(v)
+}
+class Meters(val value: Double) extends Dim[Meters] {
+  val name = "m"
+  override def create(v: Double) = new Meters(v)
 }
