@@ -23,4 +23,14 @@ class Chapter20Test extends FunSuite {
     //assert(timeTakenAcrossMultipleCores < timeTakenWithOneActor, "Adjust numberOfActors parameter for your test machine")
   }
 
+  // No test for exercise 2 - would take too much time learning about Java BufferedImages
+  // TODO - exercise 2 inverting strips of a BufferedImage
+  
+  test("Ex 3 - using Actors to find matching words in files") {
+    import com.aidan.chapter20.exercise3._
+    
+    val regex = "TODO"
+    val rootDir = "./src"
+    findFilesContainingMatchingWords(regex: String, rootDir: String)
+  }
 }

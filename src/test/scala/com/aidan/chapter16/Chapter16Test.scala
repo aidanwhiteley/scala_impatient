@@ -70,5 +70,5 @@ class Chapter16Test extends FunSuite {
     assert(occurrences === 2)
   }
   
-  // TODO - maybe - Haven't implemented exercise 10..
+  // TODO - maybe - Haven't implemented exercise 10.
 }

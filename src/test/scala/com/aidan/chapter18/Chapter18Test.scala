@@ -110,5 +110,5 @@ class Chapter18Test extends FunSuite {
     // assert((s1 + m1).toString === "16.6 s")
   }
   
-  // TODO - construct and example for Exercise 10
+  // TODO - construct an example for Exercise 10
 }
