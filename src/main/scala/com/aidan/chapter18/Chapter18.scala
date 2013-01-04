@@ -1,6 +1,7 @@
 package com.aidan.chapter18
 
 import scala.collection.mutable.ArrayBuffer
+import scala.language.reflectiveCalls
 
 object Chapter18 {
   /*
@@ -21,7 +22,7 @@ object Chapter18 {
     try {
       doNothingMuch(target)
     } catch {
-      case _ => // Not doing anything with it
+      case _: Throwable => // Not doing anything with it
     } finally {
       target.close
     }
@@ -39,7 +40,7 @@ object Chapter18 {
 }
 
 object show
-object then
+object thenn
 object around
 
 class Bug {

@@ -4,6 +4,8 @@ import org.scalatest.FunSuite
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
+import scala.language.postfixOps
+import scala.language.existentials
 
 @RunWith(classOf[JUnitRunner])
 class Chapter18Test extends FunSuite {

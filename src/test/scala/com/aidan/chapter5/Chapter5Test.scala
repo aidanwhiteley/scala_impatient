@@ -24,7 +24,7 @@ class Chapter5Test extends FunSuite {
   
   test("Basic time implementation") {
     val timeOne = new Time(18, 30)
-    val timeTwo = new Time(20, 00)
+    val timeTwo = new Time(20, 0)
     assert(timeOne.before(timeTwo), "Not before timeTwo")
   }
   

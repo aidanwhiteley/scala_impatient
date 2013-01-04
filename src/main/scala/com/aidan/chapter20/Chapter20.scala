@@ -55,7 +55,7 @@ class NumberCruncherActor extends Actor {
   }
 }
 
-class ResultsCollaterActor(val numActors: Int) extends Actor {
+class ResultsCollaterActor(val numActors: Int) extends Actor { 
   var resultsReceived: Int = 0
   val results = new Array[Double](numActors)
   def act() {

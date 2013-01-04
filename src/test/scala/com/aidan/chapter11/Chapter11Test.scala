@@ -39,14 +39,14 @@ class Chapter11Test extends FunSuite {
 
   test("Money addition") {
     assert(Money(1, 75) + Money(0, 10) == Money(1, 85), "Money addition 1")
-    assert(Money(1, 75) + Money(0, 25) == Money(2, 00), "Money addition 2")
+    assert(Money(1, 75) + Money(0, 25) == Money(2, 0), "Money addition 2")
     assert(Money(1, 75) + Money(0, 50) == Money(2, 25), "Money addition 3")
     assert(Money(4, 99) + Money(6, 99) == Money(11, 98), "Money addition 4")
   }
 
   test("Money subtraction") {
     assert(Money(1, 75) - Money(0, 10) == Money(1, 65), "Money subtraction 1")
-    assert(Money(1, 75) - Money(0, 75) == Money(1, 00), "Money subtraction 2")
+    assert(Money(1, 75) - Money(0, 75) == Money(1, 0), "Money subtraction 2")
     assert(Money(1, 75) - Money(0, 85) == Money(0, 90), "Money subtraction 3")
     assert(Money(4, 49) - Money(6, 99) == Money(-3, 50), "Money subtraction 4")
   }

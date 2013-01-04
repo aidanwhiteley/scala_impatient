@@ -1,7 +1,5 @@
 package com.aidan.chapter8
 
-object Chapter8 {}
-
 class BankAccount(initialBalance: Double) {
   private var balance = initialBalance
   def deposit(amount: Double) : Double = { balance += amount; balance }
