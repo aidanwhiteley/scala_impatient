@@ -42,10 +42,10 @@ class Chapter20Test extends FunSuite {
     // has finished. Without this, the JVM spawned for this test ends
     // and all Actors and processing stops...
     // TODO - remove this sleep statement!
-    Thread.sleep(100)
+    Thread.sleep(250)
 
     val reactResults = reactActorsRun
-    Thread.sleep(100)
+    Thread.sleep(250)
 
     println("Number of threads used by RECEIVE based actors: " + receiveResults.threads.size)
     println("Number of threads used by REACT based actors: " + reactResults.threads.size)
