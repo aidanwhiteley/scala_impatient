@@ -1,13 +1,14 @@
 package com.aidan.chapter20
 
 import java.io.File
-
 import scala.Array.canBuildFrom
 import scala.actors.Actor
+import scala.actors.Channel
+import scala.actors.OutputChannel
 import scala.util.Random
 import scala.io.Source
-
 import com.aidan.chapter9.Chapter9.subdirs
+import scala.actors.InputChannel
 
 object Chapter20 {
 
@@ -85,7 +86,7 @@ object exercise3 {
 
     val resultsActor = new MatchingFileResultsActor
     resultsActor.start
-    
+
     val filesActor = new FileFinderActor(rootDir, regex, resultsActor)
     filesActor.start
   }
@@ -94,7 +95,7 @@ object exercise3 {
 class FileFinderActor(val rootDir: String, val regex: String, val resultsActor: MatchingFileResultsActor) extends Actor {
   def act() {
     // Dont need an "event loop" as this Actor has just one task to do - so it is really just the same as a thread???
-    
+
     // Keep a count of workers created to be able to pass to results actor so it knows when all results received.
     var countActors = 0;
     for (d <- subdirs(new File(rootDir)); f <- d.listFiles if f.isFile()) {
@@ -136,7 +137,7 @@ class MatchingFileResultsActor extends Actor {
   private def prettyPrint: Unit = {
     val fileSeparator = System.getProperty("file.separator", "\\")
     val lineSeparator = System.getProperty("line.separator", "\\")
-    
+
     var outputString = ""
     for ((k, v) <- results) {
       val theFile = (k.drop(k.lastIndexOf(fileSeparator) + 1))
@@ -172,3 +173,94 @@ class FindWordsInFileActor(val file: File, val regex: String, val resultsActor: 
 case class MatchedFiles(val fileName: String, val matchedLine: String)
 case class ActorsStarted(val actorsStarted: Int)
 case class ActorsFinished()
+
+// //////////////////////////////
+// Exercise 6
+// //////////////////////////////
+object exercise6 {
+  def receiveActorsRun : ThreadingResultsActor = {
+    val numberActors = 100
+
+    val results = new ThreadingResultsActor(numberActors, true)
+    results.start
+    
+    // Returning a reference to the actor here is useful because the state
+    // of the actor is available even after the actor terminates.
+    // Probably breaks encapsulation somewhat for the sake of automatic testability.
+    results
+  }
+
+  def reactActorsRun : ThreadingResultsActor = {
+    val numberActors = 100
+
+    val results = new ThreadingResultsActor(numberActors, false)
+    results.start
+    
+    results
+  }
+}
+
+class ReceiveActor(val actorId: Int, val results: ThreadingResultsActor) extends Actor {
+  def act() {
+    // Deliberately not exiting after receiving message.
+    // Dont want this Actor to exit before all Actors set up ready to receive a message
+    while (true) {
+      receive {
+        case HelloMessage(text) => {
+          val a = new ThreadMessage(Thread.currentThread().toString)
+          results ! a
+        }
+      }
+    }
+  }
+}
+
+class ThreadingResultsActor(val numberActors: Int, val receiveActor: Boolean) extends Actor {
+
+  var threads = Set[String]()
+  var msgsReceived = 0
+  var continueLoop = true
+
+  val actors = for (i <- 1 to numberActors) yield {
+    if (receiveActor) {
+      new ReceiveActor(i, this)
+    } else {
+      new ReactActor(i, this)
+    }
+  }
+
+  for (actor <- actors) actor.start
+  for (actor <- actors) actor ! new HelloMessage("Hello actor")
+
+  def act() {
+    while (continueLoop) {
+      receive {
+        case ThreadMessage(theThread) => {
+          threads += theThread
+          msgsReceived += 1
+          if (msgsReceived == numberActors) continueLoop = false
+        }
+        case _ => throw new IllegalArgumentException("Not expected")
+      }
+    }
+  }
+}
+
+class ReactActor(val actorId: Int, val results: ThreadingResultsActor) extends Actor {
+
+  var continueLoop = true
+
+  def act() {
+    loopWhile(continueLoop) {
+      react {
+        case HelloMessage(text) => {
+          val a = new ThreadMessage(Thread.currentThread().toString)
+          results ! a
+        }
+      }
+    }
+  }
+}
+
+case class HelloMessage(val text: String)
+case class ThreadMessage(val text: String)

@@ -23,7 +23,8 @@ variables, explicit looping etc
 <h3>Project build</h3>
 <p>
 The project can be built with SBT using the build.sbt file. This should bring down the dependencies for testing using ScalaTest
-and supporting running the tests as JUnits if required,
+and supporting running the tests as JUnits if required. Running &quot;test&quot; from sbt should run the 130 or so ScalaTest based tests
+which, at the time of writing, should all pass (with 2 currently marked as ignored.
 </p><p>
 The repository doesn't include any Eclipse related files although Eclipse is being used during the development. The SBT eclipse plugin
 can be added using 
