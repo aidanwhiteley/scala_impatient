@@ -65,7 +65,8 @@ class ResultsCollaterActor(val numActors: Int) extends Actor {
           results(resultsReceived) = average
           resultsReceived += 1
           if (resultsReceived == numActors) {
-            println("Results collation Actor says the overall average: " + results.sum / results.size)
+            // Uncomment top see result
+            // println("Results collation Actor says the overall average: " + results.sum / results.size)
           }
         }
         case _ => throw new IllegalArgumentException("Not expected message to ResultsCollaterActor!")
@@ -178,40 +179,25 @@ case class ActorsFinished()
 // Exercise 6
 // //////////////////////////////
 object exercise6 {
-  def receiveActorsRun : ThreadingResultsActor = {
+  def receiveActorsRun: ThreadingResultsActor = {
     val numberActors = 100
 
     val results = new ThreadingResultsActor(numberActors, true)
     results.start
-    
+
     // Returning a reference to the actor here is useful because the state
     // of the actor is available even after the actor terminates.
     // Probably breaks encapsulation somewhat for the sake of automatic testability.
     results
   }
 
-  def reactActorsRun : ThreadingResultsActor = {
+  def reactActorsRun: ThreadingResultsActor = {
     val numberActors = 100
 
     val results = new ThreadingResultsActor(numberActors, false)
     results.start
-    
-    results
-  }
-}
 
-class ReceiveActor(val actorId: Int, val results: ThreadingResultsActor) extends Actor {
-  def act() {
-    // Deliberately not exiting after receiving message.
-    // Dont want this Actor to exit before all Actors set up ready to receive a message
-    while (true) {
-      receive {
-        case HelloMessage(text) => {
-          val a = new ThreadMessage(Thread.currentThread().toString)
-          results ! a
-        }
-      }
-    }
+    results
   }
 }
 
@@ -221,46 +207,61 @@ class ThreadingResultsActor(val numberActors: Int, val receiveActor: Boolean) ex
   var msgsReceived = 0
   var continueLoop = true
 
+  val channel = new Channel[String](this)
+
   val actors = for (i <- 1 to numberActors) yield {
     if (receiveActor) {
-      new ReceiveActor(i, this)
+      new ReceiveActor(i)
     } else {
-      new ReactActor(i, this)
+      new ReactActor(i)
     }
   }
 
   for (actor <- actors) actor.start
-  for (actor <- actors) actor ! new HelloMessage("Hello actor")
+  for (actor <- actors) actor ! new HelloMessage("Hello actor", channel)
 
   def act() {
     while (continueLoop) {
-      receive {
-        case ThreadMessage(theThread) => {
-          threads += theThread
+      channel.receive {
+        case threadName => {
+          threads += threadName
           msgsReceived += 1
           if (msgsReceived == numberActors) continueLoop = false
         }
-        case _ => throw new IllegalArgumentException("Not expected")
       }
     }
   }
 }
 
-class ReactActor(val actorId: Int, val results: ThreadingResultsActor) extends Actor {
-
-  var continueLoop = true
-
+class ReceiveActor(val actorId: Int) extends Actor {
   def act() {
-    loopWhile(continueLoop) {
-      react {
-        case HelloMessage(text) => {
-          val a = new ThreadMessage(Thread.currentThread().toString)
-          results ! a
+    // For both this ReceiveActor and the ReactActor, deliberately leaving the "message loop" 
+    // running even after the actor has received the single message it is going to get.
+    // This is to better see the effect on thread usage by avoiding different actors re-using the
+    // thread of a previously terminated actor.
+    while (true) {
+      receive {
+        case HelloMessage(text, resultChannel) => {
+          val threadName = Thread.currentThread().toString
+          resultChannel ! threadName
         }
       }
     }
   }
 }
 
-case class HelloMessage(val text: String)
-case class ThreadMessage(val text: String)
+class ReactActor(val actorId: Int) extends Actor {
+
+  def act() {
+    loopWhile(true) {
+      react {
+        case HelloMessage(text, resultChannel) => {
+          val threadName = Thread.currentThread().toString
+          resultChannel ! threadName
+        }
+      }
+    }
+  }
+}
+
+case class HelloMessage(val text: String, val resultChannel: OutputChannel[String])

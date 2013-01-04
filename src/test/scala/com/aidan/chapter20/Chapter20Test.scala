@@ -37,21 +37,24 @@ class Chapter20Test extends FunSuite {
   test("Ex 6 - Comparing thread usage of receive versus react") {
     import com.aidan.chapter20.exercise6._
     val receiveResults = receiveActorsRun
-    
+
     // Haven't figured out how to make this wait until the "supervisor" actor 
     // has finished. Without this, the JVM spawned for this test ends
     // and all Actors and processing stops...
     // TODO - remove this sleep statement!
     Thread.sleep(100)
-    
+
     val reactResults = reactActorsRun
     Thread.sleep(100)
-    
-    assert(receiveResults.threads.size > reactResults.threads.size, 
-        "Number of threads used by RECEIVE based actors should be much higher than used by REACT actors")
-    
+
     println("Number of threads used by RECEIVE based actors: " + receiveResults.threads.size)
     println("Number of threads used by REACT based actors: " + reactResults.threads.size)
+
+    assert(receiveResults.threads.size > reactResults.threads.size,
+      "Number of threads used by RECEIVE based actors should be much higher than used by REACT actors")
+
   }
+  
+  // TODO - exercises 7, 8 and 9 - the less interesting ones!
 
 }
