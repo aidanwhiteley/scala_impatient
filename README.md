@@ -40,8 +40,8 @@ With Scala 2.10 released on 4th January 2013, I changed the build over to Scala 
 </p>
 <ul>
 <li>explicit imports now required for some of the less commonly used areas of Scala such as <code>scala.language.reflectiveCalls</code></li>
-<li>the 2.9.x Actor classes are replaced by the Akka framework meaning that this code now uses the <a href="http://docs.scala-lang.org/actors-migration/">Actors Migration Kit</a> 
-to avoid a re-write of the Actor based exercises. This required changes to the build script.</li>
+<li>the 2.9.x Actor classes are deprecated in favour of the Akka framework with previous <code>scala.actors</code> code now moved out to a separate jar. 
+This required changes to the build script.</li>
 </ul>
 <p>The upshot of all this is that the project can no longer be built "as is" with Scala 2.9.x - it requires Scala 2.10</p>
 

@@ -1,14 +1,15 @@
 package com.aidan.chapter20
 
 import java.io.File
+
 import scala.Array.canBuildFrom
 import scala.actors.Actor
 import scala.actors.Channel
 import scala.actors.OutputChannel
 import scala.util.Random
-import scala.io.Source
+
+import com.aidan.chapter9.Chapter9.readFileAsArray
 import com.aidan.chapter9.Chapter9.subdirs
-import scala.actors.InputChannel
 
 object Chapter20 {
 
