@@ -1,6 +1,10 @@
 package com.aidan.chapter10
 
-import java.beans.{ PropertyChangeSupport, PropertyChangeListener, PropertyChangeEvent }
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
+import java.beans.PropertyChangeSupport
+
+import scala.Array.canBuildFrom
 
 object Chapter10 {
 }
