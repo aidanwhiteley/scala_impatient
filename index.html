@@ -34,36 +34,66 @@
         <h3>
 <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>
+This repository contains some sample solutions to the exercises in Cay Hortsmann's book
+Scala For The Impatient.
+</p>
+<p>
+Like everything else, it is a work in progress. It contains progress to date noting that 
+I haven't spent the time to create solutions for those exercises that either:
+</p>
+<ul>
+<li>don't really interest me - e.g. exercises for the chapters on packages and annotations</li>
+<li>exercises that don't readily allow test driven development - e.g. those that just want output printed to the console (albeit I've converted many of these to return testable Strings)</li>
+</ul>
+<h3>Is it any good?</h3>
+<p>
+Is the code in the solutions any good? I very much doubt it! As a long term Java user (and previous user of many other imperative languages), I know that I 
+haven't really got the many of the Scala idioms "down" yet. It is worth mentioning that despite having just completed Martin Odersky's course  
+<a href="https://www.coursera.org/course/progfun">Functional Programming Principles In Scala</a>, I am trying to create solution
+answers only using concepts introduced in the chapters preceding each exercise. So, for example, the early chapter solutions contain lots of mutable 
+variables, explicit looping etc
+</p>
+<h3>Project build</h3>
+<p>
+The project can be built with SBT using the build.sbt file. This should bring down the dependencies for testing using ScalaTest
+and supporting running the tests as JUnits if required. Running &quot;test&quot; from sbt should run the 130 or so ScalaTest based tests
+which, at the time of writing, should all pass.
+</p><p>
+The repository doesn't include any Eclipse related files although Eclipse is being used during the development. The SBT eclipse plugin
+can be added using 
+<code>
+addSbtPlugin("com.typesafe.sbteclipse" % "sbteclipse-plugin" % "2.1.0")
+</code>
+and then the project files created using 
+<code>sbt eclipse</code>.
+</p>
+<h4>Scala version</h4>
+<p>
+With Scala 2.10 released on 4th January 2013, I changed the build over to Scala 2.10. This required a few source level changes e.g.
+</p>
+<ul>
+<li>explicit imports now required for some of the less commonly used areas of Scala such as <code>scala.language.reflectiveCalls</code></li>
+<li>the 2.9.x Actor classes are deprecated in favour of the Akka framework with previous <code>scala.actors</code> code now moved out to a separate jar. 
+This required changes to the build script.</li>
+</ul>
+<p>The upshot of all this is that the project can no longer be built "as is" with Scala 2.9.x - it requires Scala 2.10</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<h2>Git and GitHub</h2>
+<p>As a long term Subversion user, I am using this project to learn Git and GitHub. Apologies for any faux pas!
+</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h2>Acknowledgements</h2>
+<p>There are plenty of GitHub repositories that contain exercises for one or two chapters of Scala For The Impatient.
+Alexander Mikhailov's <a href="https://github.com/hempalex/scala-impatient">repository</a> proved a more useful source of inspiration/ideas when stuck! 
+</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
