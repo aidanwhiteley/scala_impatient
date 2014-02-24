@@ -11,5 +11,3 @@ libraryDependencies ++= Seq(
 )
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
-
-org.scalastyle.sbt.ScalastylePlugin.Settings
