@@ -12,6 +12,9 @@ object Chapter2 {
 
   }
 
+  def anotherChangeJustForVcsTest() = {
+
+  }
 
   def assignIsUnit {
     var y: Int = 0
