@@ -1,6 +1,6 @@
 package com.aidan.chapter5
 
-import scala.reflect.BeanProperty
+import scala.beans.BeanProperty
 
 object Chapter5 {
 
@@ -33,12 +33,12 @@ class Time(val hrs: Int, val min: Int) {
 class Student(@BeanProperty var name: String, @BeanProperty var id: Long)
 
 class Person(var age: Int) {
-  if (age < 0) age = 0;
+  if (age < 0) age = 0
 }
 
 class NamedPerson(name: String) {
-  val firstName = (name.split(" "))(0)
-  val lastName = (name.split(" "))(1)
+  val firstName = name.split(" ")(0)
+  val lastName = name.split(" ")(1)
 }
 
 class Car(val manufacturer: String, val model: String, val modelYear: Int = -1, var licensePlate: String) {
