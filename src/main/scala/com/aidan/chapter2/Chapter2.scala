@@ -8,7 +8,7 @@ object Chapter2 {
     else -1
   }
 
-  // Adding a comment to practise Git merges in IntelliJ
+  // Adding a comment to practise Git merges in IntelliJ - some other change on same line
   def emptyBlock {
 
   }
