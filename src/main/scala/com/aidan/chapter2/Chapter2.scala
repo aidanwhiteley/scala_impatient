@@ -12,6 +12,9 @@ object Chapter2 {
 
   }
 
+
+  def doNothingVcsTest {}
+
   def assignIsUnit {
     var y: Int = 0
     val x: Unit = y = 1
